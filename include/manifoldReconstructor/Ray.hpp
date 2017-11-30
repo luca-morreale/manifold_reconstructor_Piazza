@@ -9,7 +9,7 @@
 #define INCLUDE_MANIFOLDRECONSTRUCTOR_RAY_HPP_
 
 
-#include <types_reconstructor.hpp>
+#include <manifoldReconstructor/types_reconstructor.hpp>
 #include <set>
 
 struct RayPath {

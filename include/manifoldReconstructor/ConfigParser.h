@@ -5,7 +5,7 @@
  *      Author: enrico
  */
 
-#include <types_config.hpp>
+#include <manifoldReconstructor/types_config.hpp>
 
 #include <iostream>
 #include <fstream>

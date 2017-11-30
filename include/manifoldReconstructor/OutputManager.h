@@ -7,8 +7,9 @@
 #ifndef OUTPUTMANAGER_H_
 #define OUTPUTMANAGER_H_
 
-#include <types_config.hpp>
-#include <types_reconstructor.hpp>
+#include <manifoldReconstructor/types_config.hpp>
+#include <manifoldReconstructor/types_reconstructor.hpp>
+
 #include <string>
 #include <array>
 #include <map>
@@ -33,7 +34,7 @@ public:
 //	void publishROSMesh(ros::Publisher& meshPublisher);
 //	void publishROSColoredMesh();
 //	void publishROSMesh();
-	void writeMeshToOff(const std::string filename);
+	void writeMeshToOff(const std::string filename, bool colors=false);
 
 	void writeAllVerticesToOFF(std::string prefixPath, std::vector<int> ids);
 	void writeTetrahedraToOFF(std::string pathPrefix, std::vector<int> ids, std::vector<Delaunay3::Cell_handle>& cells);

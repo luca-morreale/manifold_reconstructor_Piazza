@@ -1,8 +1,8 @@
-#include <ORBIncrementalParser.h>
-#include <Exceptions.hpp>
+#include <manifoldReconstructor/ORBIncrementalParser.h>
+#include <manifoldReconstructor/Exceptions.hpp>
 #include <stdexcept>
 #include <rapidjson/reader.h>
-#include <utilities.hpp>
+#include <manifoldReconstructor/utilities.hpp>
 
 #define COMMA <<", "<<
 #define SPACE <<" "<<
@@ -72,7 +72,7 @@ CameraType* ORBIncrementalParser::nextCamera() {
 		glm::mat3 intrinsic = intrinsics_.at(jsonView["id_intrinsic"].GetInt());
 
 		for (int curR = 0; curR < 3; curR++) {
-			center[curR] = jsonView["extrinsic"]["center"][curR].GetFloat();
+			center[curR] = jsonView["extrinsic"]["center"][curR].GetDouble();
 		}
 
 		for (int curR = 0; curR < 3; curR++)
@@ -82,8 +82,8 @@ CameraType* ORBIncrementalParser::nextCamera() {
 
 		for (int curR = 0; curR < 3; curR++)
 			for (int curC = 0; curC < 3; curC++) {
-				eMatrix[curR][curC] = jsonView["extrinsic"]["rotation"][curR][curC].GetFloat();
-				rotation[curR][curC] = jsonView["extrinsic"]["rotation"][curR][curC].GetFloat();
+				eMatrix[curR][curC] = jsonView["extrinsic"]["rotation"][curR][curC].GetDouble();
+				rotation[curR][curC] = jsonView["extrinsic"]["rotation"][curR][curC].GetDouble();
 			}
 
 		translation = -center * rotation;
@@ -137,7 +137,7 @@ CameraType* ORBIncrementalParser::nextCamera() {
 			}
 
 			const rapidjson::Value& jsonCameraCenter = jsonObservationObject["X"];
-			float x = jsonCameraCenter[0].GetFloat(), y = jsonCameraCenter[1].GetFloat(), z = jsonCameraCenter[2].GetFloat();
+			float x = jsonCameraCenter[0].GetDouble(), y = jsonCameraCenter[1].GetDouble(), z = jsonCameraCenter[2].GetDouble();
 			point->position = glm::vec3(x, y, z);
 			// std::cout << "       idPoint: "<<point->idPoint << "\tidReconstruction: "<<point->idReconstruction << "\tgetNunmberObservation: "<<point->getNunmberObservation() << std::endl;
 
@@ -159,13 +159,13 @@ CameraType* ORBIncrementalParser::nextCamera() {
 //				ORB_data_.addVisibility(camera, fakePoint);
 //
 ////				const rapidjson::Value& jsonCameraCenter = jsonObservationObject["X"];
-//				float fakeX = (1+fIndex)*0.1 + jsonCameraCenter[0].GetFloat(), fakeY = jsonCameraCenter[1].GetFloat(), fakeZ = jsonCameraCenter[2].GetFloat();
+//				float fakeX = (1+fIndex)*0.1 + jsonCameraCenter[0].GetDouble(), fakeY = jsonCameraCenter[1].GetDouble(), fakeZ = jsonCameraCenter[2].GetDouble();
 //				fakePoint->position = glm::vec3(fakeX, fakeY, fakeZ);
 //			}
 
 			//TODO point's 2D coordinates in frame
 //      const rapidjson::Value& jsonCameraFrameCoordinates = jsonObservationObject["x"];
-//      float u = jsonCameraFrameCoordinates[0].GetFloat(), v = jsonCameraFrameCoordinates[1].GetFloat();
+//      float u = jsonCameraFrameCoordinates[0].GetDouble(), v = jsonCameraFrameCoordinates[1].GetDouble();
 //      ORB_data_.addFrameCoordinates(camera, point, glm::vec3(u, v));
 		}
 
@@ -202,7 +202,7 @@ CameraType* ORBIncrementalParser::nextCamera() {
 //    glm::mat3 intrinsic = intrinsics_.at(jsonView["id_intrinsic"].GetInt());
 //
 //    for (int curR = 0; curR < 3; curR++) {
-//      center[curR] = jsonView["extrinsic"]["center"][curR].GetFloat();
+//      center[curR] = jsonView["extrinsic"]["center"][curR].GetDouble();
 //    }
 //
 //    for(int curR = 0; curR < 3; curR++) for(int curC = 0; curC < 3; curC++){
@@ -210,8 +210,8 @@ CameraType* ORBIncrementalParser::nextCamera() {
 //    }
 //
 //    for (int curR = 0; curR < 3; curR++) for (int curC = 0; curC < 3; curC++){
-//      eMatrix[curR][curC] = jsonView["extrinsic"]["rotation"][curR][curC].GetFloat();
-//      rotation[curR][curC] = jsonView["extrinsic"]["rotation"][curR][curC].GetFloat();
+//      eMatrix[curR][curC] = jsonView["extrinsic"]["rotation"][curR][curC].GetDouble();
+//      rotation[curR][curC] = jsonView["extrinsic"]["rotation"][curR][curC].GetDouble();
 //    }
 //
 //    translation = -center * rotation;
@@ -247,12 +247,12 @@ CameraType* ORBIncrementalParser::nextCamera() {
 //      ORB_data_.addVisibility(camera, point);
 //
 //      const rapidjson::Value& jsonCameraCenter = jsonObservationObject["X"];
-//      float x = jsonCameraCenter[0].GetFloat(), y = jsonCameraCenter[1].GetFloat(), z = jsonCameraCenter[2].GetFloat();
+//      float x = jsonCameraCenter[0].GetDouble(), y = jsonCameraCenter[1].GetDouble(), z = jsonCameraCenter[2].GetDouble();
 //      point->position = glm::vec3(x, y, z);
 //
 //      //TODO point's 2D coordinates in frame
 ////      const rapidjson::Value& jsonCameraFrameCoordinates = jsonObservationObject["x"];
-////      float u = jsonCameraFrameCoordinates[0].GetFloat(), v = jsonCameraFrameCoordinates[1].GetFloat();
+////      float u = jsonCameraFrameCoordinates[0].GetDouble(), v = jsonCameraFrameCoordinates[1].GetDouble();
 ////      ORB_data_.addFrameCoordinates(camera, point, glm::vec3(u, v));
 //    }
 //  }
@@ -268,10 +268,10 @@ void ORBIncrementalParser::parseIntrinsics() {
 		for (rapidjson::SizeType curInt = 0; curInt < intrinsicsJson.Size(); curInt++) {
 			int key = intrinsicsJson[curInt]["intrinsicId"].GetInt();
 			glm::mat3 temp(0.0);
-			temp[0][0] = intrinsicsJson[curInt]["value"]["ptr_wrapper"]["data"]["focal_length"].GetFloat();
-			temp[1][1] = intrinsicsJson[curInt]["value"]["ptr_wrapper"]["data"]["focal_length"].GetFloat();
-			temp[0][2] = intrinsicsJson[curInt]["value"]["ptr_wrapper"]["data"]["principal_point"][0].GetFloat();
-			temp[1][2] = intrinsicsJson[curInt]["value"]["ptr_wrapper"]["data"]["principal_point"][1].GetFloat();
+			temp[0][0] = intrinsicsJson[curInt]["value"]["ptr_wrapper"]["data"]["focal_length"].GetDouble();
+			temp[1][1] = intrinsicsJson[curInt]["value"]["ptr_wrapper"]["data"]["focal_length"].GetDouble();
+			temp[0][2] = intrinsicsJson[curInt]["value"]["ptr_wrapper"]["data"]["principal_point"][0].GetDouble();
+			temp[1][2] = intrinsicsJson[curInt]["value"]["ptr_wrapper"]["data"]["principal_point"][1].GetDouble();
 			temp[2][2] = 1.0;
 
 			intrinsics_.insert(std::pair<int, glm::mat3>(key, temp));

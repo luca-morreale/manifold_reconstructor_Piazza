@@ -5,7 +5,7 @@
  *      Author: enrico
  */
 
-#include <Chronometer.h>
+#include <manifoldReconstructor/Chronometer.h>
 
 Chronometer::Chronometer() {
 }

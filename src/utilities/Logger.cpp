@@ -5,7 +5,7 @@
  *      Author: andrea
  */
 
-#include <Logger.h>
+#include <manifoldReconstructor/Logger.h>
 #include <iostream>
 #include <iomanip>
 #include <sstream>

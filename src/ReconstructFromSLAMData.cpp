@@ -5,9 +5,9 @@
  *      Author: enrico
  */
 
-#include <CameraPointsCollection.h>
-#include <ReconstructFromSLAMData.h>
-#include <utilities.hpp>
+#include <manifoldReconstructor/CameraPointsCollection.h>
+#include <manifoldReconstructor/ReconstructFromSLAMData.h>
+#include <manifoldReconstructor/utilities.hpp>
 
 #define VERBOSE_UPDATE_MANIFOLD_FUNCTION false
 #define VERBOSE_ADD_CAMERA_FUNCTION false
@@ -165,7 +165,7 @@ void ReconstructFromSLAMData::update() {
 
 }
 
-void ReconstructFromSLAMData::saveMesh(std::string namePrefix, std::string nameSuffix) {
+void ReconstructFromSLAMData::saveMesh(std::string namePrefix, std::string nameSuffix, bool colors) {
 	if (config_.timeStatsOutput && VERBOSE_SAVE_MANIFOLD_FUNCTION) {
 		std::cout << std::endl << "ReconstructFromSLAMData::saveManifold iteration " << iterationCount << " / " << expectedTotalIterationsNumber_ - 1 << std::endl;
 	}
@@ -179,7 +179,7 @@ void ReconstructFromSLAMData::saveMesh(std::string namePrefix, std::string nameS
 	std::ostringstream fileName;
 	fileName << namePrefix << "manifold_" << nameSuffix << ".off";
 	std::cout << "saving " << fileName.str() << std::endl;
-	manifRec_->saveManifold(fileName.str());
+	manifRec_->saveManifold(fileName.str(), colors);
 
 	chronoSave.stop();
 	if (config_.timeStatsOutput) std::cout << "save manifold\t\t\t" << chronoSave.getSeconds() << std::endl;

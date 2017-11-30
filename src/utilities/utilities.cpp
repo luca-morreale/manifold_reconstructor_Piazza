@@ -1,4 +1,4 @@
-#include <utilities.hpp>
+#include <manifoldReconstructor/utilities.hpp>
 #include <iostream>
 #include <fstream>
 #include <string>

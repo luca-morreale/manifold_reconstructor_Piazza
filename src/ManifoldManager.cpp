@@ -5,9 +5,9 @@
  *      Author: andrea
  */
 
-#include <ManifoldManager.h>
-#include <OutputManager.h>
-#include <utilities.hpp>
+#include <manifoldReconstructor/ManifoldManager.h>
+#include <manifoldReconstructor/OutputManager.h>
+#include <manifoldReconstructor/utilities.hpp>
 #include <sstream>
 #include <iostream>
 #include <unordered_set>

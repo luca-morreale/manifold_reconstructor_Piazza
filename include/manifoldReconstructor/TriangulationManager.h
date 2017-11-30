@@ -9,18 +9,19 @@
 #ifndef TRIANGULATIONMANAGER_H_
 #define TRIANGULATIONMANAGER_H_
 
-#include <types_reconstructor.hpp>
-#include <types_config.hpp>
-#include <vector>
-#include <unordered_map>
-#include <unordered_set>
-#include <map>
-#include <set>
-#include <ManifoldManager.h>
 #include <fstream>
 #include <iostream>
-#include <Ray.hpp>
-#include <Chronometer.h>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
+#include <vector>
+
+#include <manifoldReconstructor/Chronometer.h>
+#include <manifoldReconstructor/ManifoldManager.h>
+#include <manifoldReconstructor/Ray.hpp>
+#include <manifoldReconstructor/types_config.hpp>
+#include <manifoldReconstructor/types_reconstructor.hpp>
 
 /**
  * This class provides the API to manage the 2-manifold creation as explained in the
@@ -56,7 +57,7 @@ public:
 
 	void addVisibilityPair(int cameraId, int pointId);
 
-	void saveManifold(const std::string filename);
+	void saveManifold(const std::string filename, bool colors=false);
 	void saveBoundary(int i, int j);
 
 	bool integrityCheck();

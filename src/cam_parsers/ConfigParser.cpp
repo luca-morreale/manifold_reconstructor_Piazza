@@ -5,8 +5,8 @@
  *      Author: enrico
  */
 
-#include "ConfigParser.h"
-#include <Exceptions.hpp>
+#include <manifoldReconstructor/ConfigParser.h>
+#include <manifoldReconstructor/Exceptions.hpp>
 #include <stdexcept>
 #include <rapidjson/reader.h>
 
@@ -36,31 +36,31 @@ ManifoldReconstructionConfig ConfigParser::parse(std::string path) {
 		c.enableInverseConic = document["inverseConicEnabled"].GetBool();
 
 		if (!document.HasMember("maxDistanceCamFeature")) throw JsonAccessException("maxDistanceCamFeature");
-		if (!document["maxDistanceCamFeature"].IsFloat()) throw JsonAccessException("maxDistanceCamFeature");
-		c.maxDistanceCameraPoints = document["maxDistanceCamFeature"].GetFloat();
+		if (!document["maxDistanceCamFeature"].IsDouble()) throw JsonAccessException("maxDistanceCamFeature");
+		c.maxDistanceCameraPoints = document["maxDistanceCamFeature"].GetDouble();
 
 		if (!document.HasMember("freeVoteThreshold")) throw JsonAccessException("freeVoteThreshold");
-		if (!document["freeVoteThreshold"].IsFloat()) throw JsonAccessException("freeVoteThreshold");
-		c.freeVoteThreshold = document["freeVoteThreshold"].GetFloat();
+		if (!document["freeVoteThreshold"].IsDouble()) throw JsonAccessException("freeVoteThreshold");
+		c.freeVoteThreshold = document["freeVoteThreshold"].GetDouble();
 
 		if (!document.HasMember("rayRemovalThreshold")) throw JsonAccessException("rayRemovalThreshold");
-		if (!document["rayRemovalThreshold"].IsFloat()) throw JsonAccessException("rayRemovalThreshold");
-		c.rayRemovalThreshold = document["rayRemovalThreshold"].GetFloat();
+		if (!document["rayRemovalThreshold"].IsDouble()) throw JsonAccessException("rayRemovalThreshold");
+		c.rayRemovalThreshold = document["rayRemovalThreshold"].GetDouble();
 
 		if (!document.HasMember("vertexRemovalThreshold")) throw JsonAccessException("vertexRemovalThreshold");
-		if (!document["vertexRemovalThreshold"].IsFloat()) throw JsonAccessException("vertexRemovalThreshold");
-		c.unusedVertexRemovalThreshold = document["vertexRemovalThreshold"].GetFloat();
+		if (!document["vertexRemovalThreshold"].IsDouble()) throw JsonAccessException("vertexRemovalThreshold");
+		c.unusedVertexRemovalThreshold = document["vertexRemovalThreshold"].GetDouble();
 
-		if (document.HasMember("outlierFilteringThreshold") && document["outlierFilteringThreshold"].IsFloat())
-			c.outlierFilteringThreshold = document["outlierFilteringThreshold"].GetFloat();
+		if (document.HasMember("outlierFilteringThreshold") && document["outlierFilteringThreshold"].IsDouble())
+			c.outlierFilteringThreshold = document["outlierFilteringThreshold"].GetDouble();
 
 		if (!document.HasMember("maxPointsPerCamera")) throw JsonAccessException("maxPointsPerCamera");
 		if (!document["maxPointsPerCamera"].IsInt()) throw JsonAccessException("maxPointsPerCamera");
 		c.maxPointsPerCamera = document["maxPointsPerCamera"].GetInt();
 
 		if (!document.HasMember("minDistancePointPositionUpdate")) throw JsonAccessException("minDistancePointPositionUpdate");
-		if (!document["minDistancePointPositionUpdate"].IsFloat()) throw JsonAccessException("minDistancePointPositionUpdate");
-		c.minDistancePointPositionUpdate = document["minDistancePointPositionUpdate"].GetFloat();
+		if (!document["minDistancePointPositionUpdate"].IsDouble()) throw JsonAccessException("minDistancePointPositionUpdate");
+		c.minDistancePointPositionUpdate = document["minDistancePointPositionUpdate"].GetDouble();
 
 //		if (!document.HasMember("enableSuboptimalPolicy")) throw JsonAccessException("enableSuboptimalPolicy");
 //		if (!document["enableSuboptimalPolicy"].IsBool()) throw JsonAccessException("enableSuboptimalPolicy");
@@ -80,28 +80,28 @@ ManifoldReconstructionConfig ConfigParser::parse(std::string path) {
 		}
 		
 		if (!document.HasMember("w_1")) throw JsonAccessException("w_1");
-		if (!document["w_1"].IsFloat()) throw JsonAccessException("w_1");
-		c.w_1 = document["w_1"].GetFloat();
+		if (!document["w_1"].IsDouble()) throw JsonAccessException("w_1");
+		c.w_1 = document["w_1"].GetDouble();
 
 		if (!document.HasMember("w_2")) throw JsonAccessException("w_2");
-		if (!document["w_2"].IsFloat()) throw JsonAccessException("w_2");
-		c.w_2 = document["w_2"].GetFloat();
+		if (!document["w_2"].IsDouble()) throw JsonAccessException("w_2");
+		c.w_2 = document["w_2"].GetDouble();
 
 		if (!document.HasMember("w_3")) throw JsonAccessException("w_3");
-		if (!document["w_3"].IsFloat()) throw JsonAccessException("w_3");
-		c.w_3 = document["w_3"].GetFloat();
+		if (!document["w_3"].IsDouble()) throw JsonAccessException("w_3");
+		c.w_3 = document["w_3"].GetDouble();
 
 		if (!document.HasMember("w_m")) throw JsonAccessException("w_m");
-		if (!document["w_m"].IsFloat()) throw JsonAccessException("w_m");
-		c.w_m = document["w_m"].GetFloat();
+		if (!document["w_m"].IsDouble()) throw JsonAccessException("w_m");
+		c.w_m = document["w_m"].GetDouble();
 
 		if (!document.HasMember("steinerGridStepLength")) throw JsonAccessException("");
-		if (!document["steinerGridStepLength"].IsFloat()) throw JsonAccessException("");
-		c.steinerGridStepLength = document["steinerGridStepLength"].GetFloat();
+		if (!document["steinerGridStepLength"].IsDouble()) throw JsonAccessException("");
+		c.steinerGridStepLength = document["steinerGridStepLength"].GetDouble();
 
 //		if (!document.HasMember("steinerGridSideLength")) throw JsonAccessException("");
-//		if (!document["steinerGridSideLength"].IsFloat()) throw JsonAccessException("");
-//		c.steinerGridSideLength = document["steinerGridSideLength"].GetFloat();
+//		if (!document["steinerGridSideLength"].IsDouble()) throw JsonAccessException("");
+//		c.steinerGridSideLength = document["steinerGridSideLength"].GetDouble();
 
 		if (!document.HasMember("manifold_update_every")) throw JsonAccessException("manifold_update_every");
 		if (!document["manifold_update_every"].IsInt()) throw JsonAccessException("manifold_update_every");

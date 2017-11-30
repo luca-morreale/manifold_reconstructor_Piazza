@@ -5,8 +5,9 @@
  *      Author: enrico
  */
 
-#include <CameraPointsCollection.h>
-#include <types_reconstructor.hpp>
+#include <manifoldReconstructor/CameraPointsCollection.h>
+#include <manifoldReconstructor/types_reconstructor.hpp>
+
 #include <map>
 #include <utility>
 

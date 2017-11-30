@@ -5,9 +5,9 @@
  *      Author: andrea
  */
 
-#include <TriangulationManager.h>
+#include <manifoldReconstructor/TriangulationManager.h>
 #include <vector>
-#include <utilities.hpp>
+#include <manifoldReconstructor/utilities.hpp>
 #include <Eigen/Core>
 #include <Eigen/Eigen>
 #include <algorithm>
@@ -1219,8 +1219,8 @@ void TriangulationManager::growManifold(const std::set<index3>& enclosingVolumeM
 	if (conf_.debugOutput) saveBoundary(1, 3);
 }
 
-void TriangulationManager::saveManifold(const std::string filename) {
-	manifoldManager_->getOutputManager()->writeMeshToOff(filename);
+void TriangulationManager::saveManifold(const std::string filename, bool colors) {
+	manifoldManager_->getOutputManager()->writeMeshToOff(filename, colors);
 
 	if (conf_.debugOutput) {
 

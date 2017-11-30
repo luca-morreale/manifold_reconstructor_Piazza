@@ -4,8 +4,8 @@
  *	TODO
  */
 
-#include <OutputManager.h>
-#include <Chronometer.h>
+#include <manifoldReconstructor/OutputManager.h>
+#include <manifoldReconstructor/Chronometer.h>
 #include <fstream>
 #include <iostream>
 
@@ -164,7 +164,7 @@ OutputManager::~OutputManager() {
 //
 //}
 
-void OutputManager::writeMeshToOff(const std::string filename) {
+void OutputManager::writeMeshToOff(const std::string filename, bool colors) {
 
 	std::cout << "OutputManager::writeMeshToOff\t conf_:" << &conf_ << std::endl;
 	std::cout << conf_.toString() << std::endl;
@@ -179,6 +179,7 @@ void OutputManager::writeMeshToOff(const std::string filename) {
 	std::set<index3> triangles;
 	std::map<Delaunay3::Vertex_handle, int> vertexHandleToIndex;
 	std::vector<Delaunay3::Vertex_handle> vertexHandles;
+    std::vector<glm::vec4> colorPoints;
 
 	int facetToTriangleMatrix[4][3] = { { 3, 2, 1 },	// facetIndex : 0
 	{ 0, 2, 3 },	// facetIndex : 1
@@ -247,6 +248,15 @@ void OutputManager::writeMeshToOff(const std::string filename) {
 						points.push_back(v->point());
 						vertexHandles.push_back(v);
 						vertexHandleToIndex[v] = points.size() - 1;
+                        if (colors) {
+                            int pointId = v->info().getPointId();
+                            if (pointId >= 0) {
+                                PointReconstruction &point = points_->at(pointId);
+                                colorPoints.push_back(glm::vec4(point.r, point.g, point.b, point.a));
+                            } else {
+                                colorPoints.push_back(glm::vec4(0, 0, 0, 1));
+                            }
+                        }
 					}
 				}
 
@@ -262,10 +272,16 @@ void OutputManager::writeMeshToOff(const std::string filename) {
 	chrono1.stop();
 	chrono2.start();
 
-	outfile << "OFF" << std::endl << points.size() << " " << triangles.size() << " 0" << std::endl;
+	outfile << "COFF" << std::endl << points.size() << " " << triangles.size() << " 0" << std::endl;
 
-	for (auto p : points)
-		outfile << static_cast<float>(p.x()) << " " << static_cast<float>(p.y()) << " " << static_cast<float>(p.z()) << " " << std::endl;
+    for (int i = 0; i < points.size(); i++) {
+		outfile << static_cast<float>(points[i].x()) << " " << static_cast<float>(points[i].y()) << " " << static_cast<float>(points[i].z());
+        if (colors) {
+            outfile << " " << static_cast<int>(colorPoints[i].x) << " " << static_cast<int>(colorPoints[i].y) << " " << static_cast<int>(colorPoints[i].z) << " ";
+            outfile << static_cast<int>(colorPoints[i].w);
+        }
+        outfile << std::endl;
+    }
 
 	for (auto t : triangles)
 		outfile << "3 " << t.i << " " << t.j << " " << t.k << std::endl;
@@ -339,7 +355,7 @@ void OutputManager::writeTetrahedraToOFF(std::string pathPrefix, std::vector<int
 
 	int s = cells.size();
 	if (s == 0) {
-		std::cerr << "OutputManager::writeTetrahedraAndRayToOFF: no tetrahedra to write in output for: " << outputFileName << std::endl;
+		std::cerr << "OutputManager::writeTetrahedraAndRayToOFF: no tetrahedra to write in output for: " << outputFileName.str() << std::endl;
 		return;
 	}
 
@@ -384,7 +400,7 @@ void OutputManager::writeTetrahedraToOFF(std::string pathPrefix, std::vector<int
 
 	int s = cells.size();
 	if (s == 0) {
-		std::cerr << "OutputManager::writeTetrahedraAndRayToOFF: no tetrahedra to write in output for: " << outputFileName << std::endl;
+		std::cerr << "OutputManager::writeTetrahedraAndRayToOFF: no tetrahedra to write in output for: " << outputFileName.str() << std::endl;
 		return;
 	}
 
@@ -476,7 +492,7 @@ void OutputManager::writeTrianglesToOFF(std::string pathPrefix, std::vector<int>
 
 	int s = triangles.size();
 	if (s == 0) {
-		std::cerr << "OutputManager::writeTetrahedraAndRayToOFF: no triangles to write in output for: " << outputFileName << std::endl;
+		std::cerr << "OutputManager::writeTetrahedraAndRayToOFF: no triangles to write in output for: " << outputFileName.str() << std::endl;
 		return;
 	}
 

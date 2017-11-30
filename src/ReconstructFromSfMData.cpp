@@ -5,10 +5,11 @@
  *      Author: andrea
  */
 
-#include <ReconstructFromSfMData.h>
-//#include <CameraPointsCollection.h>
-#include <utilities.hpp>
-#include <Logger.h>
+#include <manifoldReconstructor/ReconstructFromSfMData.h>
+//#include <manifoldReconstructor/CameraPointsCollection.h>
+#include <manifoldReconstructor/utilities.hpp>
+#include <manifoldReconstructor/Logger.h>
+
 #include <set>
 #include <map>
 

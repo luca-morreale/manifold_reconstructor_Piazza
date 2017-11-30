@@ -6,10 +6,12 @@
 #include <fstream>
 #include <vector>
 #include <map>
+
 #include <rapidjson/document.h>
-#include <CameraPointsCollection.h>
-#include <types_reconstructor.hpp>
-#include <types_config.hpp>
+
+#include <manifoldReconstructor/CameraPointsCollection.h>
+#include <manifoldReconstructor/types_reconstructor.hpp>
+#include <manifoldReconstructor/types_config.hpp>
 
 class ORBIncrementalParser {
 public:

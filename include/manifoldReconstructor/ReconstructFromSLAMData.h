@@ -8,12 +8,14 @@
 #ifndef RECONSTRUCTFROMSLAMDATA_H_
 #define RECONSTRUCTFROMSLAMDATA_H_
 
-#include <TriangulationManager.h>
-#include <types_config.hpp>
-#include <OutputManager.h>
+#include <manifoldReconstructor/TriangulationManager.h>
+#include <manifoldReconstructor/types_config.hpp>
+#include <manifoldReconstructor/OutputManager.h>
+#include <manifoldReconstructor/Chronometer.h>
+
 #include <opencv2/core/core.hpp>
 #include <opencv2/calib3d/calib3d.hpp>
-#include <Chronometer.h>
+
 
 class ReconstructFromSLAMData {
 public:
@@ -22,7 +24,7 @@ public:
 
 	void addCamera(CameraType* newCamera);
 	void update();
-	void saveMesh(std::string namePrefix, std::string nameSuffix);
+	void saveMesh(std::string namePrefix, std::string nameSuffix, bool colors=false);
 	bool integrityCheck();
 
 	void overwriteFocalY(float f);

@@ -20,7 +20,7 @@
 #define TYPES_RECONSTR_HPP_
 
 #include <string>
-#include <glm.hpp>
+#include <glm/glm.hpp>
 #include <Eigen/Core>
 
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
@@ -34,8 +34,8 @@
 
 #include <CGAL/algorithm.h>
 
-#include <Delaunay3DCellInfo.h>
-#include <Delaunay3DVertexInfo.h>
+#include <manifoldReconstructor/Delaunay3DCellInfo.h>
+#include <manifoldReconstructor/Delaunay3DVertexInfo.h>
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel K;
 typedef K::Triangle_3 Triangle;

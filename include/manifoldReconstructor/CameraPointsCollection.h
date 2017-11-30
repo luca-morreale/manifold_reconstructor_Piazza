@@ -8,7 +8,8 @@
 #ifndef INCLUDE_TEST_CAMERAPOINTSCOLLECTION_H_
 #define INCLUDE_TEST_CAMERAPOINTSCOLLECTION_H_
 
-#include <types_reconstructor.hpp>
+#include <manifoldReconstructor/types_reconstructor.hpp>
+
 #include <map>
 
 class CameraPointsCollection {

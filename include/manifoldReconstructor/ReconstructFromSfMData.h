@@ -8,9 +8,10 @@
 #ifndef RECONSTRUCTFROMSFMDATA_H_
 #define RECONSTRUCTFROMSFMDATA_H_
 
-#include <SfMData.h>
-#include <types_config.hpp>
-#include <TriangulationManager.h>
+#include <manifoldReconstructor/SfMData.h>
+#include <manifoldReconstructor/types_config.hpp>
+#include <manifoldReconstructor/TriangulationManager.h>
+
 #include <opencv2/core/core.hpp>
 #include <opencv2/calib3d/calib3d.hpp>
 

@@ -12,3 +12,4 @@
 stats/timeStats.csv
 /data/
 /Release/
+build/

@@ -12,9 +12,11 @@
 #include <fstream>
 #include <vector>
 #include <map>
+
 #include <rapidjson/document.h>
-#include <CameraPointsCollection.h>
-#include <types_reconstructor.hpp>
+
+#include <manifoldReconstructor/CameraPointsCollection.h>
+#include <manifoldReconstructor/types_reconstructor.hpp>
 
 
 class ORBParser {

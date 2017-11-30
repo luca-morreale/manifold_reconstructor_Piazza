@@ -13,16 +13,16 @@
 //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 //  GNU General Public License for more details.
 
-#include <CameraPointsCollection.h>
-#include <Chronometer.h>
-#include <Logger.h>
-#include <ORBIncrementalParser.h>
-#include <ReconstructFromSLAMData.h>
+#include <manifoldReconstructor/CameraPointsCollection.h>
+#include <manifoldReconstructor/Chronometer.h>
+#include <manifoldReconstructor/Logger.h>
+#include <manifoldReconstructor/ORBIncrementalParser.h>
+#include <manifoldReconstructor/ReconstructFromSLAMData.h>
 #include <OpenMvgParser.h>
-#include <ReconstructFromSfMData.h>
-#include <ConfigParser.h>
-#include <types_config.hpp>
-#include <types_reconstructor.hpp>
+#include <manifoldReconstructor/ReconstructFromSfMData.h>
+#include <manifoldReconstructor/ConfigParser.h>
+#include <manifoldReconstructor/types_config.hpp>
+#include <manifoldReconstructor/types_reconstructor.hpp>
 #include <cstdlib>
 #include <iostream>
 #include <map>
@@ -424,7 +424,7 @@ int main(int argc, char **argv) {
 		if (!updatingCamera && m.iterationCount && !(m.iterationCount % confManif.saveMeshEvery)){
 			std::stringstream ssm, ssnm;
 			ssm << "current_" << m.iterationCount << "_" << confManif.statsId;
-			ssnm << ssm <<  "_NOT_MANIFOLD";
+			ssnm << ssm.str() <<  "_NOT_MANIFOLD";
 
 			if(!confManif.checkIntegrityWhenFinished || m.integrityCheck()) m.saveMesh(confManif.outputFolder, ssm.str());
 			else m.saveMesh(confManif.outputFolder, ssnm.str());

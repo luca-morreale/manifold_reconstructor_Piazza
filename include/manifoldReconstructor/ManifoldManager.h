@@ -1,10 +1,11 @@
 #ifndef MANIFOLDMANAGER_H_
 #define MANIFOLDMANAGER_H_
 
-#include <types_reconstructor.hpp>
-#include <types_config.hpp>
-#include <OutputManager.h>
-#include <Chronometer.h>
+#include <manifoldReconstructor/types_reconstructor.hpp>
+#include <manifoldReconstructor/types_config.hpp>
+#include <manifoldReconstructor/OutputManager.h>
+#include <manifoldReconstructor/Chronometer.h>
+
 #include <iostream>
 
 class ManifoldManager {
